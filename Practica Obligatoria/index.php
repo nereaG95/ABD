@@ -64,7 +64,7 @@
 					
 					$sql="SELECT idGrupo FROM gruposusuario WHERE (idUser='$usuario')";
 					$consulta=mysqli_query($db, $sql);
-					if(!mysqli_fetch_array($consulta)){
+					if(mysqli_num_rows($consulta)==0){
 						echo "<p>No puede enviar mensajes grupales, no pertences a ningun grupo</p>";
 					}
 					else{
@@ -77,7 +77,8 @@
 							$consul2 = mysqli_query($db, $sql3);
 							$lib2=mysqli_fetch_assoc($consul2);
 							$valor = $lib2['nombreGrupo'];
-							echo "<option value='".$id."'> ". $valor."</option>";
+							echo "El valo es :" .$valor ." yupiii";
+							echo "<option value='".$id."'> ".$valor ."</option>";
 						}
 						echo "</select>";
 						echo "</p>";
