@@ -1,0 +1,45 @@
+%cliente(Id, Nombre, Apellidos)
+cliente(1, 'Javier', 'Herranz').
+cliente(2, 'Ana', 'Martin').
+cliente(3, 'Gerardo', 'de la Iglesia').
+cliente(4, 'Manuel', 'Moreno').
+cliente(5, 'Lucia', 'Rodriguez').
+cliente(6, 'Raquel', 'Velasco').
+cliente(7, 'Ignacio', 'Martin').
+
+%cuenta(Id, Tipo, Saldo, IdTitular)
+cuenta(1, nomina, 12000, 1).
+cuenta(2, ahorro, 15000, 1).
+cuenta(3, nomina, 21500, 2).
+cuenta(4, ahorro, 1200, 3).
+cuenta(5, nomina, 5000, 4).
+cuenta(6, ahorro, 5000, 5).
+cuenta(7, null, 100, 6).
+cuenta(8, nomina, 1500, 6).
+
+
+%Expresar el cliente, el tipo de cuenta que tiene y el dinero
+cuentas_clientes(N,A,T,D) :- cliente(I1,N,A), cuenta(_,T,D,I2), I1=I2.
+
+%%Expresar el cliente, el tipo de cuenta que tiene (que no sean null) y el dinero
+cuentas_clientes2(N,A,T,D) :- cliente(I1,N,A), cuenta(_,T,D,I2), I1=I2, is_not_null(T).
+
+%Calcular el numero de cuentas de cada cliente sin mostrar los que no tienen
+num_cuentas(N,A,Cuentas):- group_by(cuentas_clientes(N,A,_,_),[N,A] , Cuentas=count(N)).
+
+%Calcular el número de cuentas de cada cliente incluyendo los que no tienen
+cuentasL(I, N, A, T):- lj(cliente(I,N,A), cuenta(_,T,D,_I2), I=_I2).
+num_cuentas2(N,A,Cuentas):- group_by(cuentasL(I,N,A,T),[I,N,A], Cuentas=count(T)).
+
+%Calcular el saldo total de los clientes
+cuentasDinero(I,N,A,D):- lj(cliente(I,N,A), cuenta(_,T,D,I2), I=I2).
+dinero_clientes(N,A,SumDinero):- group_by(cuentasDinero(I,N,A,D),[I,N,A], SumDinero = sum(D)).
+
+%Mostrar los clientes que tengan mas de 10000 euros en la cuenta
+clientes_masDinero(N,A,SumDinero):- group_by(cuentasDinero(I,N,A,D),[I,N,A], SumDinero = sum(D)), SumDinero > 10000.
+
+%Mostrar el dinero total del banco
+total_dinero(Dinero):-group_by(dinero_clientes(_,_,D),[], Dinero=sum(D)).
+
+%Mostrar los clientes que no tengan cuenta de ahorro
+clientes_sin_cuenta_ahorro(N,A):- cuentas_clientes(N,A,_,_), not cuentas_clientes(N,A,ahorro,_).

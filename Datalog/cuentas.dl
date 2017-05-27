@@ -1,0 +1,44 @@
+% Base de datos extensional
+% cuenta(Nombre, Apellidos, Tipo, Saldo)
+
+%Datos insertados en la base de datos
+cuenta('Javier', 'Herranz', nomina, 12000).
+cuenta('Ana', 'Ana', nomina, 21500).
+cuenta('Nerea', 'Ana', nomina, 21500).
+cuenta('Gerardo', 'de la Iglesia', ahorro, 1200).
+cuenta('Manuel', 'Moreno', nomina, 5000).
+cuenta('Lucia', 'Rodriguez', ahorro, 5000).
+cuenta('Raquel', 'Velasco', null, 100).
+
+
+%Hechos y objetivos
+
+% cuenta_gold(Nombre, Apellido) Devuelve el nombre y apellido de clientes con cuentas de mas de 12000
+cuenta_gold(X, Y) :- cuenta(X, Y, nomina, Z), Z > 12000.
+
+% cuenta_Moreno(Nombre, Apellido) Devuelve el nombre y apellido de los clientes que se apellide moreno
+cuenta_Moreno(X, Y) :- cuenta(X, Y, Z, S), Y = 'Moreno'.
+
+%Cuenta de una persona dada
+cuenta_persona(X, Y) :- cuenta(X, R, Z, S), Y = R.
+
+%cuenta_nomina(Nombre, Apellido, nomina) Devuelve el nombre y apellidos de los clientes que tengan cuenta nomina
+cuenta_nomina(X, Y, Z) :- cuenta(X, Y, Z, S), Z = 'nomina'.
+
+%cuenta_con1200(Nombre, Apellido) Devuelve el nombre y apellido de los clientes que tengan 12000€ en la cuenta
+cuenta_con1200( X, Y) :- cuenta(X, Y, Z, S), S = 12000.
+
+%cuenta_nombreApellidos_igual(Nombre, Apellido) Devuelve el nombre y apellidos de los clientes que tengan el nombre y apellido igual.
+cuenta_igual(X, Y) :- cuenta(X, Y, Z, S), X=Y.
+
+%sonAmiguetes(Nombre1, Nombre2) Devuelve los nombres de los que son amigos por tener el mismo dinero
+sonAmiguetes(N1, N2) :-cuenta(N1,Y, Z, S), cuenta(N2, R, T, S), (N1\=N2).
+
+
+%Test Querys
+%cuenta_gold(X,Y) 
+%cuenta_Moreno(X, Y)
+%cuenta_nomina(X, Y, Z)
+%cuenta_con1200( X, Y) 
+%cuenta_igual2(X,Y)
+%sonAmiguetes(N1, N2) 
