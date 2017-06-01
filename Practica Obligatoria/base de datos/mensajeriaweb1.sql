@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2017 a las 12:52:09
+-- Tiempo de generación: 31-05-2017 a las 23:55:04
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 7.0.4
 
@@ -109,7 +109,11 @@ ALTER TABLE `gruposusuario`
 -- Indices de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  ADD PRIMARY KEY (`idMensaje`);
+  ADD PRIMARY KEY (`idMensaje`),
+  ADD UNIQUE KEY `emisor_2` (`emisor`,`receptor`,`grupo`),
+  ADD KEY `emisor` (`emisor`),
+  ADD KEY `grupo` (`grupo`),
+  ADD KEY `receptor` (`receptor`);
 
 --
 -- Indices de la tabla `tipomusicausuarios`
@@ -131,12 +135,12 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
-  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `idMensaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `idMensaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- Restricciones para tablas volcadas
 --
@@ -147,6 +151,14 @@ ALTER TABLE `mensajes`
 ALTER TABLE `gruposusuario`
   ADD CONSTRAINT `gruposusuario_ibfk_1` FOREIGN KEY (`idGrupo`) REFERENCES `grupos` (`idGrupo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `gruposusuario_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  ADD CONSTRAINT `mensajes_ibfk_1` FOREIGN KEY (`emisor`) REFERENCES `usuarios` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `mensajes_ibfk_2` FOREIGN KEY (`grupo`) REFERENCES `grupos` (`idGrupo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `mensajes_ibfk_3` FOREIGN KEY (`receptor`) REFERENCES `usuarios` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tipomusicausuarios`

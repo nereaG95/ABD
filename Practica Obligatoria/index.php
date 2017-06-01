@@ -77,7 +77,6 @@
 							$consul2 = mysqli_query($db, $sql3);
 							$lib2=mysqli_fetch_assoc($consul2);
 							$valor = $lib2['nombreGrupo'];
-							echo "El valo es :" .$valor ." yupiii";
 							echo "<option value='".$id."'> ".$valor ."</option>";
 						}
 						echo "</select>";
@@ -87,7 +86,7 @@
 				?>
 			</div>
 			<textarea name="mensaje" id="mensaje" maxlength="250" rows="10" cols="30" placeholder="Escribe aqui tu mensaje" required></textarea>
-			<input type='submit' id='botonsms' class='boton3' value='Enviar Mensjae'/>
+			<input type='submit' id='botonsms' class='boton3' value='Enviar Mensaje'/>
 			<div class="correcto" id="correcto">Su mensaje ha sido enviado correctamente</div>
 			</form>
 		</div>

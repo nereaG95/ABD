@@ -1,0 +1,3 @@
+Se ha implementado la funcionalidad de prestar libros,
+ya que no tenia mucho sentido que hubiera una función de comprar libros, ya
+que se trata de la biblioteca.

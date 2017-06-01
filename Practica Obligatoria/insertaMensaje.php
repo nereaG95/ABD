@@ -23,6 +23,5 @@
 		$db->query($sql) or die($db->error);
 		echo "1";
 	}
-	//header('Location: index.php');
 	@mysqli_close($db); //Cerramos la base de datos
 ?>
