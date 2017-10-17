@@ -1,0 +1,69 @@
+%Familia
+hombre(abraham).
+hombre(clancy).
+hombre(herbert).
+hombre(homer).
+hombre(bart).
+
+mujer(mona).
+mujer(jackie).
+mujer(marge).
+mujer(patty).
+mujer(selma).
+mujer(lisa).
+mujer(maggie).
+mujer(ling).
+
+progenitor(abraham, herbert).
+progenitor(abraham, homer).
+progenitor(mona, homer).
+progenitor(clancy, marge).
+progenitor(jackie, marge).
+progenitor(clancy, patty).
+progenitor(jackie, patty).
+progenitor(clancy, selma).
+progenitor(jackie, selma).
+progenitor(homer, bart).
+progenitor(marge, bart).
+progenitor(homer, lisa).
+progenitor(marge, lisa).
+progenitor(homer, maggie).
+progenitor(marge, maggie).
+progenitor(selma, ling).
+
+%Regla para saber si es padre Padre(X,Y)= "X es padre de Y"
+padre(X,Y) :- progenitor(X,Y), hombre(X).
+
+%Regla para saber si es madre Madre(X,Y) = "X es madre de Y"
+madre(X,Y) :- progenitor(X,Y), mujer(X).
+
+%Regla para saber si son hermanos hermanos(X,Y) = "X es hermano de Y"
+hermanos(X,Y) :- progenitor(A,X), progenitor(A,Y), X\=Y.
+
+%Regla para saber si es abuela abuela(X, Y) = "X es abuela de Y"
+abuela(X,Y) :- mujer(X), progenitor(X,A), progenitor(A,Y), A\=Y.
+%Regla para saber si es abuela abuela(X, Y) = "X es abuela de Y" usando las anteriores reglas
+abuela2(X,Y) :- madre(X,A), progenitor(A, Y).
+
+%Regla para saber si es abuelo(X,Y)= "X es abuelo de Y"
+abuelo(X,Y) :- padre(X,A), progenitor(A, Y).
+
+%Regla para saber si tia(X,Y) ="X es tia de Y"
+tia(X,Y) :- mujer(X), hermanos(X,A), progenitor(A,Y).
+
+
+%Regla para saber si es tio(X,Y) = "X es tio de Y"
+tio(X,Y) :- hombre(X), hermanos(X,A), progenitor(A,Y).
+
+
+%antecestor(X, Y) = "X es antecesor de Y"
+antecesor(X,Y) :- progenitor(X,Y).
+antecesor(X,Y) :- progenitor(X,Z), antecesor(Z,Y).
+
+%Regla para saber si son de la misma generación
+mg(X,Y) :- hermanos(X,Y).
+mg(X,Y) :- progenitor(Z,X), progenitor(V,Y), mg(Z,V).
+
+
+
+

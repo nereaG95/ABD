@@ -1,0 +1,81 @@
+%libros:
+%libros(Titulo,Ibsn,Autor,Tema,Anyo,Editorial,Precio,Unidades).
+libros('Harry Potter',1234,'Jk Rowling',ciencia,2005,santillana,20,5).
+libros('Harry Potter 2',12345,'Jk Rowling',ciencia,2006,santillana,60,10).
+libros('Harry Potter 3',12346,'Jk Rowling',ciencia,2008,santillana,70,10).
+libros('La biblia',1111,'Jesus',religioso,1975,santillana,70,10).
+%clientes:
+%clientes(Nombre,Nif,Num?pedido).
+clientes('Nerea','45731664M',1).
+clientes('Adrian','45731663G',2).
+clientes('Adrian2','45731663D',3).
+clientes('Nerea','45731664M',4).
+clientes('Nerea','45731664M',5).
+
+%pedidos:
+%pedidos(Num?pedido,Dia,Mes,Anyo,Ibsn,Unidades).
+pedidos(1,10,3,2017,1234,5).
+pedidos(2,3,10,2016,12345,6).
+pedidos(3,3,10,2017,1234,6).
+pedidos(4,3,10,2017,1111,6).
+pedidos(5,3,10,2017,12345,6).
+
+%1. Libros de un autor dado
+libros_autor(T,A):-libros(T,_,A,_,_,_,_,_).
+
+%2. Libros ”caros” (precio mayor de 40 euros).
+libros_caros(T):-libros(T,_,_,_,_,_,P,_), P > 40.
+
+%3. Libros casi agotados (menos de 10 unidades).
+libros_casiagotados(T):- libros(T,_,_,_,_,_,_,U), U <10.
+
+%4. Libros antiguos (anteriores a 1980).
+libros_antiguos(T):- libros(T,_,_,_,A,_,_,_), A <1980.
+
+%5. Libros comprados por cada cliente (especifica solo el t?tulo).
+libros_cliente(C,L):- libros(L,I,_,_,_,_,_,_), clientes(C,_,P), pedidos(P,_,_,_,I,_).
+
+%6. Libros comprados por cliente por a˜no.
+libros_cliente_año(C,L,A):- libros(L,I,_,_,_,_,_,_), clientes(C,_,P), pedidos(P,_,_,A,I,_).
+
+%7. Libros comprados por cliente por t´?tulo.
+libros_cliente_titulo(C,L):- libros(L,I,_,_,_,_,_,_), clientes(C,_,P), pedidos(P,_,_,_,I,_).
+
+%8. Ingresos por venta por año.
+ingresos_año(A,T):- libros(_,I,_,_,_,_,P,_), pedidos(_,_,_,A,I,U), T is P*U.
+ingresos_venta_año(A,Total):- group_by(ingresos_año(A,T),[A], Total = sum(T)).
+
+%9. Ingresos por venta por libro.
+ingresos_libro(L,T):-libros(L,I,_,_,_,_,P,_), pedidos(_,_,_,_,I,U), T is P*U.
+ingresos_venta_libro(L,Total):- group_by(ingresos_libro(L,T),[L],Total= sum(T)).
+
+%Ingresos por venta por libro y que salgan los libros que no tengan ventas
+ingresos_libro2(L,P,U):- lj(libros(L,I,_,_,_,_,P,_), pedidos(_,_,_,_,I2,U), I=I2).
+ingresos_venta_libro2(L,T):- ingresos_libro2(L,P,U), T is P*U.
+ingresos_venta_libroFinal(L,Total):- group_by(ingresos_venta_libro2(L,T),[L], Total= sum(T)).
+
+%10. Ingresos por venta por libro y ano.
+
+%11. Todos los pedidos y su fecha.
+pedidos_fecha(N,P,D,M,A):- clientes(N,_,P), pedidos(P,D,M,A,_,_).
+
+%12. Ingresos por tema y ano de compras.
+ingreso_tema_ano(T,A,D):- libros(_,I,_,T,_,_,P,_),pedidos(_,_,_,A,I,U), D is P*U.
+total_ingreso_temayano(T,A,Total):- group_by(ingreso_tema_ano(T,A,D),[T,A], Total=sum(D)).
+ 
+
+%13. Ingresos por editorial y a˜no.
+ingreso_editorial_ano(E,A,D):- libros(_,I,_,_,_,E,P,_),pedidos(_,_,_,A,I,U), D is P*U.
+total_ingreso_editorialyano(E,A,Total):- group_by(ingreso_editorial_ano(E,A,D),[E,A], Total=sum(D)).
+
+%14. Ingresos por t?tulo.
+ingresos_titulo(T,D):- libros(T,I,_,_,_,_,P,_), pedidos(_,_,_,_,I,U), D is P*U.
+ingresos_total_titulo(T,Total):- group_by(ingresos_titulo(T,D),[T], Total=sum(D)).
+
+%Ingresos por titulo saliendo hasta los libros que no tienen ingresos
+ingesos_titulo2(T,P,U):- lj(libros(T,I,_,_,_,_,P,_), pedidos(_,_,_,_,I2,U), I=I2).
+ingresos_titulo3(T,D):- ingesos_titulo2(T,P,U), D is P*U.
+ingresos_total_titulo(T,Total):- group_by(ingresos_titulo3(T,D),[T], Total=sum(D)).
+
+%Total de pedidos de cada cliente:
+pedidos_clientes(N, Total):- group_by(clientes(N,D,P),[D,N], Total = count(D)).

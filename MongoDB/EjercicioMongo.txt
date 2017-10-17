@@ -1,0 +1,64 @@
+1.Crea la base de datos videoclub.
+use videoclub
+
+2.Crea la colección películas.
+
+db.createCollection('peliculas');
+
+3.Inserta documentos que representen a peliculas. Campos a teneren
+cuenta: titulo, año de estreno, actores y genero.
+
+db.peliculas.insert({titulo:"3 metros sobre el cielo", estreno:2010, actores:["Mario Casas", "Maria Valverde"], genero:"comedia"})
+db.peliculas.insert({titulo:"Tengo ganas de ti", estreno:2012, actores:["Mario Casas", "Maria Valverde","Clara lago"], genero:"comedia"})
+db.peliculas.insert({titulo:"Harry potter", estreno:2005, actores:["Daniel Racklifer", "Emma Watson"], genero:"magia"})
+db.peliculas.insert({titulo:"Matrix", estreno:2004, actores:["Matrix2", "Matrix1"], genero:"ciencia-ficcion"})
+
+
+****Para borrar en mongo : db.peliculas.remove({campo:"loquequieras"})
+
+4. Actualizar la pelicula de titulo ”Matrix” con la siguiente informacion
+{”tipo”:”DVD”,
+” Titulo”:”Matrix”,
+” estreno”: 1999,
+” genero”: ”accion”
+}
+
+db.peliculas.update({titulo:"Matrix"},{$set:{estreno:1999, genero:"accion", tipo:"DVD"});
+
+5.Actualizar el documento referido a la pelicula Matrix cambiando el valor de la clave genero a ciencia ficcion.
+
+db.peliculas.update({titulo:"Matrix"},{$set:{genero:"cincia ficcion"}});
+
+
+6.Actualizar el documento referido a la pelicula Matrix anadiendo al array actores los valores de Antonio Banderas y Brad Pitt en una unica operacion
+
+db.peliculas.update({titulo:"Matrix"},{$pushAll:{actores:["Antonio Banderas", "Brad Pit"]}});
+
+
+7.Actualizar el documento referido a la pelicula Matrix anadiendo al array actores los valores Joe Pantoliano, Brad Pitt y Natalie Portman.
+
+db.peliculas.update({titulo:"Matrix"},{$pushAll:{actores:["Joe Pantoliano", "Brad Pit", "Natalie Portman"]}});
+db.peliculas.update({titulo:"Matrix"},{$push:{actores:{$each:["Nerea Gomez", "Adrian Panadero"]}}});
+
+//Para que no se inserten duplicados
+db.peliculas.update({titulo:"Matrix"},{$addToSet:{actores:{$each:["Nerea Gomez", "Adrian Panadero", "Ainhoa"]}}});
+
+8. Actualizar el documento de la pelicula Matrix eliminando del array el primer y ultimo actor.
+
+//ultimo actor
+db.peliculas.update({titulo:"Matrix"},{$pop:{actores:true}});
+//Primer actor
+db.peliculas.update({titulo:"Matrix"},{$pop:{actores:-1}});
+
+9.Añadir a la coleccion
+{” tipo”: ”Libro”,
+” Titulo”: ”Constantinopla”,
+” capitulos”: 12,
+” leidos”:3
+}
+
+db.peliculas.insert({titulo:"Constantinopla", tipo:"libro", capitulo:12, leidos:3})
+
+10.Incrementar en cinco unidades el valor de la clave leidos.
+
+db.peliculas.update({titulo:"Constantinopla"},{$inc:{leidos:5}})

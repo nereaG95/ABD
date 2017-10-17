@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Biblioteca</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		.error {
+			background-color: #E74F4F;
+			top: 0;
+			padding: 10px 0 ;
+			border-radius:  0 0 5px 5px;
+			color: #fff;
+			text-align: center;
+			display: none;
+			left: 30%;
+		}
+	</style>
+</head>
+<body>
+	<form action="" method="post">
+	<p>User: <input type="text" id="user2" name="user"></p>
+	<div class="error" id="add_err">Ese usuario ya existe</div>
+	<div class="error" id="add_err2">Ese usuario no existe</div>
+	<p>Contraseña: <input type="password" name="pass" onFocus="existe()"></p>
+	<input type="submit" value="Login">
+	</form>
+
+<script>
+function existe(){
+	var name= document.getElementById("user2").value;
+	/*var user = $("#user2").val()
+	if(user != ''){
+		$.ajax({
+		   type: "POST",
+		   url: "existeUsuario.php",
+		   data: "name="+user,
+		   success: function(html){   
+			if(html == '0'){
+				$("#add_err").slideDown();
+				$("#add_err").delay(2000);
+				$("#add_err").slideUp()
+			}
+			else{
+				$("#add_err2").slideDown();
+				$("#add_err2").delay(2000);
+				$("#add_err2").slideUp()
+			}
+		   }		   
+		});
+		xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange= function (){
+			if (xhttp.readyState == 4 && xhttp.status== 200) {
+				document.getElementById("txtHint").innerHTML = xhttp.responseText;
+			}
+		}
+		xhttp.open("GET","existeUsuario.php?q="+name, true);
+		xhttp.send();*/
+
+	/*}*/
+}
+</script>
+</body>
+</html>
