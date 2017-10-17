@@ -1,0 +1,10 @@
+<!DOCTYPE factura [
+    <!ELEMENT examen (ejercicio+)> 
+    <!ELEMENT ejercicio EMPTY> //ES Vacioo
+    
+    
+    <!-- DEFINICION DE ATRIBUTOS -->
+    <!ATTLIST ejercicio id ID #REQUIRED>
+    <!ATTLIST ejercicio puntuacion CDATA #REQUIRED>
+    <!ATTLIST ejercicios num CDATA #REQUIRED>
+]

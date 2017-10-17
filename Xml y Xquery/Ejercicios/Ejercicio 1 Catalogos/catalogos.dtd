@@ -1,0 +1,13 @@
+<!DOCTYPE catalogo [
+<!ELEMENT catalogo-preguntas (pregunta)>
+<!ELEMENT pregunta(enunciado, opcion+)>
+
+<!ELEMENT enunciado (#PCDATA)>
+<!ELEMENT opcion (#PCDATA)>
+
+
+<!ATTLIST enunciado id ID #REQUIRED>
+<!ATTLIST opcion num CDATA #REQUIRED>
+<!ATTLIST opcion correcta ("si"|"no") "no">
+
+]

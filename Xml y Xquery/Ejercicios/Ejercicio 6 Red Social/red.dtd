@@ -1,0 +1,29 @@
+Para cada usuario se almacena un identificador único, su nick, su edad y un conjunto de cero o má
+publicaciones. Cada una de estas últimas contiene una fecha (expresada mediante tres atributos) y un
+texto con el contenido de la publicación. Además, una publicación puede recibir varios votos de los
+usuarios. Cada voto se incluye dentro de la propia publicación, y contiene el identificador del usuario
+que ha emitido dicho voto. Ten en cuenta que una publicación puede recibir votos de distintos usuarios,
+y un usuario puede votar a varias publicaciones.
+
+<!-- PRIMERO SE PONE <!DOCTYPE nombreRaiz -->
+<!DOCTYPE red-social [
+    <!ELEMENT red-social (usuario*)> 
+    <!ELEMENT usuario (nick, edad, publicacion*)>
+    <!ELEMENT publicacion (texto, voto*)>
+    
+    <!-- PONEMOS LOS ELEMENTOS QUE SON DE TIPO TEXTO #PCDATA-->
+    <!ELEMENT nick (#PCDATA)>
+    <!ELEMENT texto (#PCDATA)>
+    <!ELEMENT edad (#PCDATA)>
+    
+    <!-- LOS ELEMENTOS QUE PUEDEN ESTAR VACIOS SE PONEN CON EMPTY-->
+    <!ELEMENT voto EMPTY>
+    <!ELEMENT reproduccion EMPTY>
+    
+    <!-- DEFINICION DE ATRIBUTOS -->
+    <!ATTLIST usuario id ID #REQUIRED>
+    <!ATTLIST publicacion  dia CDATA #REQUIRED>
+    <!ATTLIST publicacion mes CDATA #REQUIRED>
+    <!ATTLIST publicacion año CDATA #REQUIRED>
+    <!ATTLIST voto id IDREF #REQUIRED>
+]

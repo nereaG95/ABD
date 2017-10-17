@@ -1,0 +1,40 @@
+<!-- PRIMERO SE PONE <!DOCTYPE nombreRaiz -->
+<!DOCTYPE factura [
+    <!ELEMENT factura (datos_empresa, datos_cliente, datos_factura)> 
+    <!ELEMENT datos_empresa (nombre, dir, poblacion, provincia, cif, telefono?,fax?)>
+    <!ELEMENT datos_cliente (nombre, direnv, poblacion, provincia) >
+    <!ELEMENT datos_factura (fecha, linea*, base, cuota_iva, total)>
+    <!ELEMENT linea (ref, desc, cant, precio, importe)>
+    
+    <!-- PONEMOS LOS ELEMENTOS QUE SON DE TIPO TEXTO #PCDATA-->
+    <!-- PREGUNTAR LOS NUMEROS TB SON PCDATA??-->
+    <!ELEMENT nombre (#PCDATA)>
+    <!ELEMENT dir (#PCDATA)>
+    <!ELEMENT poblacion (#PCDATA)>
+    <!ELEMENT provincia (#PCDATA)>
+    <!ELEMENT cif (#PCDATA)>
+    <!ELEMENT direnv (#PCDATA)>
+    <!ELEMENT ref (#PCDATA)>
+    <!ELEMENT desc (#PCDATA)>
+    <!ELEMENT fecha (#PCDATA)>
+    <!ELEMENT base (#PCDATA)>
+    <!ELEMENT cuota_iva (#PCDATA)>
+    <!ELEMENT total (#PCDATA)>
+    <!ELEMENT cant (#PCDATA)>
+    <!ELEMENT precio (#PCDATA)>
+    <!ELEMENT importe (#PCDATA)>
+    
+    <!-- LOS ELEMENTOS QUE PUEDEN ESTAR VACIOS SE PONEN CON EMPTY-->
+    <!ELEMENT telefono (#EMPTY)>
+    <!ELEMENT fax (#EMPTY)>
+    
+    <!-- DEFINICION DE ATRIBUTOS -->
+    <!ATTLIST factura nfac ID #REQUIRED>
+    <!ATTLIST datos_cliente ncli ID #REQUIRED>
+    <!ATTLIST datos_pedido nped ID #REQUIRED>
+    <!ATTLIST datos_factura moneda CDATA #FIXED "Euro">
+    <!ATTLIST datos_factura iva NMTOKEN #REQUIRED>
+    <!ATTLIST datos_factura fpago (efectivo | tarjeta | plazos) #REQUIRED>
+    <!ATTLIST datos_empresa telefono CDATA #FIXED "91111111">
+    <!-- El del telefono pq es FIXED-->
+]

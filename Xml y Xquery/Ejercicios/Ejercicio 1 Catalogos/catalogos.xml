@@ -1,0 +1,18 @@
+<catalogo-preguntas>
+
+    <pregunta id="p1">
+    <enunciado>¿En qué año se libró la batalla de Waterloo?</enunciado>
+    <opcion num="2">1769</opcion>
+    <opcion num="1">1845</opcion>
+    <opcion num="3" correcta="sí">1815</opcion>
+    <opcion num="4">1830</opcion>
+    </pregunta>
+    
+    <pregunta id="p3">
+    <enunciado>¿Quien esn la puta ama?</enunciado>
+    <opcion num="2">Nerea</opcion>
+    <opcion num="1" correcta="sí">Nerea y solo Nerea</opcion>
+    <opcion num="3" correcta="sí">Ninguna de las anteriores</opcion>
+    <opcion num="4">Ne</opcion>
+    </pregunta>
+</catalogo-preguntas>

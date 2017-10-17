@@ -1,0 +1,25 @@
+Para cada usuario se almacena un identificador único, su nick, su edad y un conjunto de cero o má
+publicaciones. Cada una de estas últimas contiene una fecha (expresada mediante tres atributos) y un
+texto con el contenido de la publicación. Además, una publicación puede recibir varios votos de los
+usuarios. Cada voto se incluye dentro de la propia publicación, y contiene el identificador del usuario
+que ha emitido dicho voto. Ten en cuenta que una publicación puede recibir votos de distintos usuarios,
+y un usuario puede votar a varias publicaciones.
+
+<!-- PRIMERO SE PONE <!DOCTYPE nombreRaiz -->
+<!DOCTYPE diccionario [
+    <!ELEMENT diccionario (palabra*, definicion*)> 
+    <!ELEMENT palabra (nombre, significado+)>
+    
+    <!-- PONEMOS LOS ELEMENTOS QUE SON DE TIPO TEXTO #PCDATA-->
+    <!ELEMENT definicion (#PCDATA)>
+    <!ELEMENT nombre (#PCDATA)>
+    
+    <!-- LOS ELEMENTOS QUE PUEDEN ESTAR VACIOS SE PONEN CON EMPTY-->
+    <!ELEMENT significado EMPTY>
+
+    <!-- DEFINICION DE ATRIBUTOS -->
+    <!ATTLIST significado id IDREF #REQUIRED>
+    <!ATTLIST definicion  id ID #REQUIRED>
+    <!ATTLIST palabra idioma CDATA #REQUIRED>
+    <!ATTLIST palabra categoria (verbo | sustantivo | adjetivo | otro) #REQUIRED>
+]

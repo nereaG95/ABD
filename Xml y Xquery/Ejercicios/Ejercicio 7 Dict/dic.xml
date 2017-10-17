@@ -1,0 +1,53 @@
+<diccionario>
+    
+    <palabra idioma="ES" categoria="verbo">
+    
+        <nombre>renunciar</nombre>
+        
+        <significado id="c01"/>
+        
+        <significado id="c02"/>
+        
+        <significado id="c03"/>
+        
+    </palabra>
+    
+    <palabra idioma="ES" categoria="verbo">
+    
+        <nombre>cesar</nombre>
+        
+        <significado id="c01"/>
+        
+    </palabra>
+    
+        <palabra idioma="ES" categoria="verbo">
+        
+        <nombre>pasar</nombre>
+        
+        <significado id="c03"/>
+    
+    </palabra>
+    
+    <palabra idioma="EN" categoria="verbo">
+    
+        <nombre>give up</nombre>
+        
+        <significado id="c02"/>
+        
+        <significado id="c03"/>
+    
+    </palabra>
+    
+    
+    
+    <definicion id="c01">Hacer dejación voluntaria, dimisión o apartamiento de algo
+    
+    que se tiene, o se puede tener.</definicion>
+    
+    <definicion id="c02">Desistir de algún empeño o proyecto.</definicion>
+    
+    <definicion id="c03">En algunos juegos, no entrar.</definicion>
+    
+
+
+</diccionario>

@@ -1,0 +1,32 @@
+<red-social>
+
+    <usuario id="u01">
+        <nick>Federico</nick>
+        <edad>31</edad>
+        <publicacion dia="20" mes="04" año="2003">
+            <texto>En la playa con Federica.</texto>
+            <voto id="u02"/>
+            <voto id="u03"/>
+            <voto id="u02"/>
+            <voto id="u03"/>
+            <voto id="u02"/>
+            <voto id="u03"/>
+        </publicacion>
+        
+        <publicacion dia="20" mes="04" año="2003">
+            <texto>Hoy a dormir todo el día.</texto>
+            <voto id="u03"/>
+        </publicacion>
+        
+        <publicacion dia="20" mes="04" año="2003">
+            <texto>Hoy a dormir todo el día.</texto>
+            <voto id="u03"/>
+        </publicacion>
+    </usuario>
+    
+    <usuario id="u02">
+        <nick> Nerea </nick>
+        <edad> 2 </edad>
+    </usuario>
+
+</red-social>

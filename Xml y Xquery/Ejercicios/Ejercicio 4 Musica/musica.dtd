@@ -1,0 +1,25 @@
+<!-- PRIMERO SE PONE <!DOCTYPE nombreRaiz -->
+<!DOCTYPE bd-musica [
+    <!ELEMENT bd-musica (artista*, cancion*, reproducion*)> 
+    <!ELEMENT artista (nombre, descripcion?)>
+    <!ELEMENT cancion (titulo, participa+)>
+    
+    <!-- PONEMOS LOS ELEMENTOS QUE SON DE TIPO TEXTO #PCDATA-->
+    <!-- PREGUNTAR LOS NUMEROS TB SON PCDATA??-->
+    <!ELEMENT nombre (#PCDATA)>
+    <!ELEMENT descripcion (#PCDATA)>
+    <!ELEMENT titulo (#PCDATA)>
+    
+    <!-- LOS ELEMENTOS QUE PUEDEN ESTAR VACIOS SE PONEN CON EMPTY-->
+    <!ELEMENT participa EMPTY>
+    <!ELEMENT reproduccion EMPTY>
+    
+    <!-- DEFINICION DE ATRIBUTOS -->
+    <!ATTLIST artista id ID #REQUIRED>
+    <!ATTLIST cancion id ID #REQUIRED>
+    <!ATTLIST participa id IDREF #REQUIRED>
+    <!ATTLIST reproduccion usuario CDATA #REQUIRED>
+    <!ATTLIST reproduccion cancion IDREF #REQUIRED>
+    <!ATTLIST reproduccion bloqueado (si|no) "no">
+
+]

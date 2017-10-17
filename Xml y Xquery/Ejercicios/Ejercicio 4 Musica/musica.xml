@@ -1,0 +1,30 @@
+<bd-musica>
+
+<artista id="a01">
+    <nombre>Muse</nombre>
+    <descripcion> Banda inglesa de Rock formada en 1994 originaria de Teignmouth, Devon. </descripcion>
+</artista>
+
+<artista id="a02">
+    <nombre>Lady gaga</nombre>
+    <descripcion> Cantante, compositora, productora, bailarina, activista y diseñadora de moda estadounidense.</descripcion>
+</artista>
+
+
+<cancion id="c01">
+    <titulo>Telephone</titulo>
+    <participa id="a02"/>
+    <participa id="a01"/>
+</cancion>
+
+<cancion id="c02">
+    <titulo>Map of the problematique</titulo>
+    <participa id="a01"/>
+</cancion>
+
+
+<reproduccion usuario="pepe43@gmail.com" cancion="c02" bloqueado="sí"/>
+<reproduccion usuario="otro@sip.ucm.es" cancion="c02"/>
+<reproduccion usuario="pepe43@gmail.com" cancion="c01" bloqueado="sí"/>
+
+</bd-musica>
